@@ -29,6 +29,9 @@ projeto-escalonador/
 │── output.txt  # arquivo de saída (gerado após a execução)
 │── README.md   # documentação do projeto
 
+
+
+
 💡 Você pode compilar a partir da pasta src ou configurar o projeto em uma IDE (como VS Code ou IntelliJ).
 
 📂 Estrutura do Código
