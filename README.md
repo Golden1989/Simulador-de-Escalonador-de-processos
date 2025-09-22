@@ -15,6 +15,22 @@ Processos passam entre as filas de CPU e I/O até serem concluídos.
 
 Geração de arquivo de saída (output.txt) com o tempo de finalização de cada processo.
 
+📂 Organização de Pastas
+
+Estrutura sugerida para o projeto:
+projeto-escalonador/
+│── src/
+│   ├── Scheduler.java
+│   ├── Process.java
+│   ├── SimpleQueue.java
+│   └── PriorityReadyQueue.java
+│
+│── input.txt   # arquivo de entrada com os processos
+│── output.txt  # arquivo de saída (gerado após a execução)
+│── README.md   # documentação do projeto
+
+💡 Você pode compilar a partir da pasta src ou configurar o projeto em uma IDE (como VS Code ou IntelliJ).
+
 📂 Estrutura do Código
 
 Scheduler.java → Contém a lógica principal da simulação.
