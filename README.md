@@ -1,23 +1,33 @@
-Simulador de Escalonamento de Processos
+📘 Simulador de Escalonamento de Processos + Sistema Produtor–Consumidor (Threads)
 
-Este projeto implementa um simulador de escalonamento de processos em Java, utilizando fila de prioridade para a CPU e fila FIFO para operações de I/O.
-Ele reproduz o funcionamento de um sistema operacional que gerencia processos com diferentes tempos de chegada, prioridades, tempo de CPU e de I/O.
+Este repositório contém dois projetos acadêmicos em Java, ambos relacionados a Sistemas Operacionais:
 
-🖥️ Funcionalidades
+Simulador de Escalonamento de Processos (fila de prioridades + FIFO).
 
-Leitura de processos a partir de um arquivo de entrada (input.txt).
+Sistema Produtor–Consumidor usando Threads, Semáforos e Mutex.
 
-Escalonamento por prioridade (maior prioridade = executado primeiro).
+Os dois projetos foram implementados sem o uso de coleções da biblioteca padrão (como ArrayList), utilizando apenas estruturas próprias como filas simples e filas por prioridade.
 
-Fatia de tempo (quantum) para CPU (3 ciclos) e I/O (6 ciclos).
+🖥️ 1) Simulador de Escalonamento de Processos
 
-Processos passam entre as filas de CPU e I/O até serem concluídos.
+Simula o funcionamento de um escalonador de CPU e I/O com operações de chegada, preempção por quantum, filas de prioridade e alternância CPU ↔ I/O.
 
-Geração de arquivo de saída (output.txt) com o tempo de finalização de cada processo.
+✅ Funcionalidades
 
-📂 Organização de Pastas
+Leitura de processos a partir de input.txt.
 
-Estrutura sugerida para o projeto:
+Escalonamento por prioridade (maior prioridade executa primeiro).
+
+Quantum de CPU = 3 ciclos.
+
+Quantum de I/O = 6 ciclos.
+
+Processos circulam entre CPU, I/O e finalização.
+
+Geração de output.txt contendo o tempo de finalização de cada processo.
+
+📂 Organização de Pastas do Simulador
+
 projeto-escalonador/
 │── src/
 │   ├── Scheduler.java
@@ -25,96 +35,142 @@ projeto-escalonador/
 │   ├── SimpleQueue.java
 │   └── PriorityReadyQueue.java
 │
-│── input.txt   # arquivo de entrada com os processos
-│── output.txt  # arquivo de saída (gerado após a execução)
-│── README.md   # documentação do projeto
+│── input.txt     # entrada com processos
+│── output.txt    # saída gerada
+│── README.md
 
 
-
-
-💡 Você pode compilar a partir da pasta src ou configurar o projeto em uma IDE (como VS Code ou IntelliJ).
-
-📂 Estrutura do Código
-
-Scheduler.java → Contém a lógica principal da simulação.
-
-Process.java → Representa um processo, com atributos como id, arrival, remCPU, remIO e priority.
-
-SimpleQueue.java → Implementa uma fila FIFO simples.
-
-PriorityReadyQueue.java → Implementa uma fila de prontos baseada em prioridade (usa várias filas FIFO, uma por prioridade).
-
-📥 Formato do Arquivo de Entrada (input.txt)
-
-Cada linha do arquivo deve conter as informações de um processo, separadas por ;:
+📥 Formato do Arquivo input.txt
 
 id;arrival;tIO;tCPU;priority
 
-Exemplos:
+Exemplo:
 1;0;4;6;2
 2;2;3;5;1
 3;4;2;8;3
 
-
-Onde:
-
-id → Identificador do processo.
-
-arrival → Tempo de chegada no sistema.
-
-tIO → Tempo total de I/O necessário.
-
-tCPU → Tempo total de CPU necessário.
-
-priority → Prioridade (quanto maior, mais alta).
-
-📤 Saída (output.txt)
-
-O arquivo de saída lista o tempo em que cada processo finalizou:
+📤 Formato do output.txt
 
 tempo_saida;id
 
 Exemplo:
+
 12;1
 18;2
 25;3
 
-▶️ Como Executar
+▶️ Como Executar (Simulador)
 
-Compile os arquivos Java:
+Compile:
 
-   javac *.java
-
-
-Execute a simulação passando o arquivo de entrada e saída:
-
-  java Scheduler input.txt output.txt
+javac *.java
 
 
-Se não passar parâmetros, por padrão serão usados:
+Execute:
 
-Entrada → input.txt
+java Scheduler input.txt output.txt
 
-Saída → output.txt
+
+Se não especificado, usa:
+
+entrada → input.txt
+
+saída → output.txt
 
 🔧 Ajustes Possíveis
 
-Alterar o quantum da CPU (CPU_QUANTUM) no código (Scheduler.java).
+Alterar o quantum da CPU e I/O direto em Scheduler.java.
 
-Alterar o quantum de I/O (IO_QUANTUM).
+Adicionar mais processos.
 
-Adicionar novos processos no arquivo input.txt.
+Ajustar prioridades.
 
-📚 Conceitos Envolvidos
+📚 Conceitos Aplicados (Simulador)
 
-Escalonamento de processos (CPU e I/O).
+Escalonamento por prioridade.
 
-Filas de prioridade e FIFO.
+Simulação de ciclos de tempo.
 
-Simulação de tempo discreto (cada iteração do loop = 1 ciclo de tempo).
+Filas FIFO e filas de prioridades.
 
-Quantum (time slice) para limitar quanto tempo cada processo pode ocupar a CPU/I/O antes de revezar.
+Quantum (time slice).
 
-🚀 Tecnologias
+Alternância entre CPU e I/O.
 
-Java (código escrito sem uso de coleções da biblioteca padrão, apenas arrays e filas próprias).
+🔧 2) Sistema Produtor–Consumidor (Threads, Semáforos, Mutex)
+
+Implementação completa do problema clássico Produtor–Consumidor, usando:
+
+Semaphore
+
+ReentrantLock
+
+Thread com classes separadas para produtor e consumidor
+
+Log automático das operações em arquivo texto
+
+O buffer tem 7 posições, com:
+
+Produtor produz até 15 itens
+
+Consumidor consome até 12 itens
+
+📂 Organização de Pastas do Produtor–Consumidor
+trabalho-threads/
+│── Buffer.java
+│── Produtor.java
+│── Consumidor.java
+│── Main.java
+│── log.txt
+│── README.md
+
+📝 Funcionamento
+
+O produtor só insere se houver espaço.
+
+O consumidor só remove se houver itens.
+
+Todas as operações são registradas no arquivo log.txt.
+
+Exemplo:
+
+Produtor-1: Produtor - Inserido item 42 no buffer – espaços disponíveis: 6
+Consumidor-1: Consumidor - Consumido item 42 do buffer – espaços disponíveis: 7
+
+▶️ Como Executar (Threads)
+
+Compile:
+
+javac *.java
+
+
+Execute:
+
+java Main
+
+
+Gera automaticamente:
+
+log.txt
+
+📚 Conceitos Aplicados (Threads)
+
+Semaphore: controla espaços cheios/vazios do buffer.
+
+Mutex (ReentrantLock): garante exclusão mútua.
+
+Região crítica: métodos produtor e consumidor.
+
+Thread Synchronization: evita race conditions.
+
+Buffer circular.
+
+📦 Conclusão
+
+Este repositório reúne dois projetos essenciais de Sistemas Operacionais:
+
+✔️ Um escalonador completo com filas, prioridades e quantum.
+✔️ Um sistema robusto produtor–consumidor com sincronização real.
+
+Ambos são implementados de forma didática, modular e com logs/saídas para análise.
+
