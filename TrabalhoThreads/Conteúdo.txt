@@ -1,0 +1,61 @@
+
+🎯 Objetivo
+
+O programa implementa o problema clássico do Produtor-Consumidor, usando threads, semáforos e exclusão mútua.
+O buffer tem capacidade fixa (7 posições) e serve como recurso compartilhado entre as threads.
+
+⚙️ Componentes principais
+🔹 Semaphore
+
+empty → controla o número de posições vazias.
+
+full → controla o número de posições cheias.
+Eles garantem que:
+
+Um produtor espere se o buffer estiver cheio.
+
+Um consumidor espere se o buffer estiver vazio.
+
+🔹 ReentrantLock (mutex)
+
+Garante que apenas uma thread por vez acesse a região crítica do buffer.
+
+Evita condições de corrida, impedindo que duas threads alterem o mesmo índice simultaneamente.
+
+🔹 Buffer
+
+Implementa os métodos produzir() e consumir().
+
+O buffer é circular — os índices de inserção e remoção voltam ao início quando atingem o final.
+
+Também grava o log de cada operação no arquivo log.txt.
+
+🔹 Produtor e Consumidor
+
+São threads (extends Thread) que usam o mesmo objeto Buffer.
+
+O produtor cria até 15 itens (se houver espaço).
+
+O consumidor remove até 12 itens (se houver itens disponíveis).
+
+💬 Relação com o conteúdo de sala
+
+Sincronização: uso de semáforos e bloqueios garante acesso coordenado ao buffer.
+
+Concorrência e exclusão mútua: controladas pelo ReentrantLock.
+
+Deadlock prevention: a liberação das permissões segue ordem correta (lock → ação → unlock).
+
+Problema do Produtor-Consumidor: exemplo prático de comunicação indireta entre processos via memória compartilhada.
+
+✅ Conclusão
+
+O programa demonstra na prática:
+
+Controle de concorrência com semáforos.
+
+Sincronização entre threads produtoras e consumidoras.
+
+Registro de atividades em log.
+
+Compreensão dos conceitos teóricos de mutex, sincronização, e buffers limitados.
